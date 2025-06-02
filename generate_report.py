@@ -144,7 +144,7 @@ def main():
             key=lambda f: os.path.getmtime(os.path.join(stat_dir, f))
         )[-1]
     except IndexError:
-        print(f"❌ No perf-stat files in {stat_dir}")
+        print(f"No perf-stat files in {stat_dir}")
         sys.exit(1)
 
     try:
@@ -153,7 +153,7 @@ def main():
             key=lambda f: os.path.getmtime(os.path.join(collapsed_dir, f))
         )[-1]
     except IndexError:
-        print(f"❌ No collapsed files in {collapsed_dir}")
+        print(f"No collapsed files in {collapsed_dir}")
         sys.exit(1)
 
     try:
@@ -162,7 +162,7 @@ def main():
             key=lambda f: os.path.getmtime(os.path.join(flamegraph_dir, f))
         )[-1]
     except IndexError:
-        print(f"❌ No flamegraph files in {flamegraph_dir}")
+        print(f"No flamegraph files in {flamegraph_dir}")
         sys.exit(1)
 
     # Parse data
@@ -193,7 +193,7 @@ def main():
     with open(report_path, 'w') as f:
         f.write(rendered_html)
 
-    print(f"✅ Report generated: {report_path}")
+    print(f"Report generated: {report_path}")
 
 if __name__ == '__main__':
     main()
