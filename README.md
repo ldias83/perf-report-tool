@@ -1,25 +1,26 @@
 # Perf-Report-Tool
 
-**A reusable, project-agnostic performance reporting tool for C++ projects**
+**A performance reporting toolkit for C++ projects**
 
 ---
 
-## Overview
+## 1 · What it does
 
-**Perf-Report-Tool** automates the collection and presentation of performance metrics (cache references, cache misses, branch misses, etc.) and flamegraphs for any C++ project that follows a simple directory layout. It parses raw `perf` outputs, collapses stack traces, and generates a polished HTML report with interactive Plotly charts—showing cache/branch statistics and the top sampled functions—alongside a link to your flamegraph.
+1. **Records**  
+   `perf-record.sh` runs `perf record`, collapses stacks, and builds a flamegraph — all saved under  
+   `perf-report-tool/gen/{perfdata,collapsed,flamegraph,stat}`.
 
-By defining a small JSON configuration for each project, you can leverage this tool across multiple repositories without code duplication.
+2. **Reports**  
+   `perf-report.sh` converts that raw data into a stand-alone **HTML report** with:
 
----
+| Section | Details |
+|---------|---------|
+| Cache / branch counters | Plotly bar chart from `perf stat`            |
+| Top hot functions       | Plotly bar chart from collapsed stacks       |
+| Flamegraph link         | Points to the newest SVG in *gen/flamegraph* |
 
-## Key Features
-
-- **Project-agnostic**: Just point to any C++ project’s `prf/out/` directory (where `perf` artifacts reside).
-- **Interactive Charts**: Automatically generates Plotly bar charts for cache & branch counters and top functions by sample count.
-- **Flamegraph Link**: Embeds a relative link to your most recent flamegraph SVG.
-- **HTML Output**: Produces a standalone, styled HTML report you can open in any browser or commit to Git alongside your release.
-- **Simple Configuration**: A tiny `config.json` per project defines paths and project metadata—no code changes needed.
-- **Versioned Reports**: Tie each report to a Git tag or release version.
+The report is written to **any project you name** under  
+`<project-root>/rpt/<version>/report.html` (folder auto-created, timestamp suffix added if a clash occurs).
 
 ---
 
@@ -45,33 +46,37 @@ cargo install inferno
 Clone this repository somewhere outside your C++ project directory:
 
 ```bash
-cd ~/Documents/Projects
-git clone https://github.com/your-username/perf-report-tool.git
+git clone https://github.com/your-user/perf-report-tool.git
 cd perf-report-tool
 python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
+. .venv/bin/activate
+pip install -q pandas plotly jinja2
 ```
 
 ## Directory Structure required (for the project which has the performance reports to be read).
 
 ```bash
-prj/
-└── prf/
-    └── out/
-        ├── collapsed/
-        ├── flamegraph/
-        ├── perfdata/
-        └── stat/
+perf-report-tool/
+├─ bin/
+│  ├─ perf-record.sh      # collect data
+│  └─ perf-report.sh      # build HTML
+├─ cfg/
+│  └─ default.json        # generic, relative paths
+├─ gen/                   # raw perf output (shared by all projects)
+│  ├─ collapsed/   perfdata/   flamegraph/   stat/
+└─ tpl/
+   └─ report.html         # Jinja2 template
 ```
+
 
 ## Usage
 ```bash
-source .venv/bin/activate
-python generate_report.py config/prj.json v1.0.00
-```
+# 1. record perf (still inside perf-report-tool)
+./bin/perf-record.sh ../target/binary
 
-## Versioning & Git Integration
-- Tagging each release in Git (e.g., git tag v1.0.00)
-- Generating the report with the same version number
-- Committing the HTML report to your repository under prf/out/reports/
+# 3. generate report
+./bin/perf-report.sh    \n
+    -t ../ChronoCache   \n        # --dst  (required)
+    -v v1.0.01          \n        # --ver  (required)
+    -n nightly                    # --report-name (optional)
+```
