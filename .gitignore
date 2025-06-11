@@ -1,0 +1,21 @@
+# Ignore virtual environments
+.venv/
+venv/
+
+# Python cache files
+__pycache__/
+*.py[cod]
+
+# Jupyter Notebook checkpoints (if ever used)
+.ipynb_checkpoints/
+
+# VSCode and other IDE config
+.vscode/
+.idea/
+
+# OS metadata files
+.DS_Store
+
+# Profiling output and reports
+prf/
+reports/

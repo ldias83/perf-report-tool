@@ -1,8 +1,8 @@
 {
   "project_name": "ChronoCache",
   "project_root": "../ChronoCache",
-  "perf_stat_path": "prf/stat",
-  "collapsed_path": "prf/collapsed",
-  "flamegraph_path": "prf/flamegraph",
+  "perf_stat_path": "prf/out/stat",
+  "collapsed_path": "prf/out/collapsed",
+  "flamegraph_path": "prf/out/flamegraph",
   "report_output": "reports"
 }
