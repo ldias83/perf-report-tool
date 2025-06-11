@@ -53,7 +53,7 @@ python3 -m venv .venv
 pip install -q pandas plotly jinja2
 ```
 
-## Directory Structure required (for the project which has the performance reports to be read).
+## Directory Structure
 
 ```bash
 perf-report-tool/
