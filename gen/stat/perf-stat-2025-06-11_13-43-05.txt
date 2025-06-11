@@ -1,0 +1,18 @@
+
+ Performance counter stats for '/home/ldias/Documents/Projects/ChronoCache/bld/chronocache':
+
+           627,433      cpu_atom/cache-references/                                              (68.74%)
+           623,975      cpu_core/cache-references/                                              (31.26%)
+           155,597      cpu_atom/cache-misses/           #   24.80% of all cache refs           (68.74%)
+           150,894      cpu_core/cache-misses/           #   24.18% of all cache refs           (31.26%)
+        26,677,044      cpu_atom/branches/                                                      (68.74%)
+        44,927,815      cpu_core/branches/                                                      (31.26%)
+           152,717      cpu_atom/branch-misses/          #    0.57% of all branches             (68.74%)
+            90,988      cpu_core/branch-misses/          #    0.20% of all branches             (31.26%)
+
+       0.614910132 seconds time elapsed
+
+       0.042218000 seconds user
+       0.047244000 seconds sys
+
+

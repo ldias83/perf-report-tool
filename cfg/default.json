@@ -1,0 +1,8 @@
+{
+  "paths": {
+    "perf_stat"      : "gen/stat",
+    "collapsed"      : "gen/collapsed",
+    "flamegraph"     : "gen/flamegraph",
+    "report_output"  : "rpt"
+  }
+}

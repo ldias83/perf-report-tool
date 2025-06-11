@@ -1,0 +1,40 @@
+<!-- tpl/report.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Performance Report - {{ project_name }} {{ version }}</title>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 40px; }
+    h1 { color: #2c3e50; }
+    h2 { color: #34495e; margin-top: 40px; }
+    .chart-container { width: 100%; height: 600px; margin-bottom: 40px; }
+    a { color: #2980b9; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <h1>Performance Report</h1>
+  <p><strong>Project:</strong> {{ project_name }}<br>
+     <strong>Release:</strong> {{ version }}<br>
+     <strong>Generated:</strong> {{ timestamp }}</p>
+
+  <h2>Flamegraph</h2>
+  {% for label, link in flamegraph_links.items() %}
+    <p><a href="{{ link }}" target="_blank">Flamegraph: {{ label }}</a></p>
+  {% endfor %}
+
+  <h2>Cache & Branch Statistics</h2>
+  <div class="chart-container">{{ cache_stats_div | safe }}</div>
+
+  <h2>Top Sampled Functions</h2>
+  <div class="chart-container">{{ top_funcs_div | safe }}</div>
+
+  <h2>Google Benchmark Results</h2>
+  <div class="chart-container">{{ gb_chart_div | safe }}</div>
+
+  <h2>Valgrind Heap Allocations</h2>
+  <div class="chart-container">{{ heap_chart_div | safe }}</div>
+</body>
+</html>

@@ -1,0 +1,18 @@
+
+ Performance counter stats for './bld/chronocache':
+
+           536,566      cpu_atom/cache-references/                                              (24.18%)
+           503,474      cpu_core/cache-references/                                              (75.82%)
+           225,020      cpu_atom/cache-misses/           #   41.94% of all cache refs           (24.18%)
+            90,701      cpu_core/cache-misses/           #   18.02% of all cache refs           (75.82%)
+        18,625,213      cpu_atom/branches/                                                      (24.18%)
+        16,543,790      cpu_core/branches/                                                      (75.82%)
+           183,264      cpu_atom/branch-misses/          #    0.98% of all branches             (24.18%)
+            94,930      cpu_core/branch-misses/          #    0.57% of all branches             (75.82%)
+
+       0.563602249 seconds time elapsed
+
+       0.014917000 seconds user
+       0.038786000 seconds sys
+
+
