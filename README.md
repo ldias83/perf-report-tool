@@ -63,7 +63,10 @@ perf-report-tool/
 ├─ cfg/
 │  └─ default.json        # generic, relative paths
 ├─ gen/                   # raw perf output (shared by all projects)
-│  ├─ collapsed/   perfdata/   flamegraph/   stat/
+│  ├─ collapsed/   
+│  ├─ perfdata/   
+│  ├─ flamegraph/   
+│  └─ stat/
 └─ tpl/
    └─ report.html         # Jinja2 template
 ```
